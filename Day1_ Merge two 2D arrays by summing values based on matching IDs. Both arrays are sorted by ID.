@@ -1,0 +1,71 @@
+/*📚 Problem: Merge two 2D arrays by summing values based on matching IDs. Both arrays are sorted by ID.
+
+🧠 Concept used: Two Pointers (forward-forward merge)
+
+⏱️ Time taken: 38 minutes 52 seconds
+
+😅 Not solved fully by myself — referred to ChatGPT to understand the two-pointer logic and implemented it.
+
+🐞 Mistakes made:
+
+Incorrect placement of pointer increment
+
+Didn’t handle the case when IDs are different
+
+Missed the base condition i < nums1.length while finishing the loop
+Time Complexity	O(n + m)
+Space Complexity	O(n + m)
+O(m + n) → Time grows linearly as m and n grow
+Runtime 1 ms
+Memory 45.56 MB
+
+🧪 Next goal: Practice similar problems (merge sorted arrays, interval merge, etc.)
+
+Sharing here to keep myself accountable and document the learning 💪
+#LeetCode #DSA #TwoPointers #Java #CodingJourney #LearningInPublic */
+
+### ✅ Java Code:
+
+class Solution {
+    public int[][] mergeArrays(int[][] nums1, int[][] nums2) {
+        
+        int i =0;
+        int j =0;
+        List<int[]> result = new ArrayList<>();
+       
+        while(i < nums1.length && j < nums2.length){
+           
+            int id1 = nums1[i][0];
+            int id2 = nums2[j][0];
+            int value1 = nums1[i][1];
+            int value2 = nums2[j][1];
+
+             if(id1 == id2){
+                 result.add(new int[]{id1, (value1 + value2)});
+                  i++;
+                  j++;
+             }
+             else if(id1 < id2){
+                  result.add(new int[]{id1, (value1)});
+                   i++;
+               //  result.add(new int[]{id2, (value2)});
+                  
+             }
+             else{
+                result.add(new int[]{id2, (value2)});
+                 j++;
+               // result.add(new int[]{id1, (value1)});
+             }
+            
+        } 
+        while (i < nums1.length){
+            result.add(new int[]{nums1[i][0], nums1[i][1]});
+            i++;
+        }
+          while (j < nums2.length){
+            result.add(new int[]{nums2[j][0], nums2[j][1]});
+            j++;
+        }
+        return result.toArray(new int[result.size()][2]);
+    }
+}
