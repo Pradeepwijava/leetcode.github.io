@@ -1,4 +1,6 @@
-/*📚 Problem: Merge two 2D arrays by summing values based on matching IDs. Both arrays are sorted by ID.
+/*📚 Problem: 2570.Merge two 2D arrays by summing values based on matching IDs. Both arrays are sorted by ID.
+
+    Link : https://leetcode.com/problems/merge-two-2d-arrays-by-summing-values/
 
 🧠 Concept used: Two Pointers (forward-forward merge)
 
