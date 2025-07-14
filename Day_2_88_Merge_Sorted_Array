@@ -1,0 +1,72 @@
+/*📚 Problem: 88. Merge Sorted Array
+
+    Link : https://leetcode.com/problems/merge-sorted-array/description/
+
+🧠 Concept used: Two Pointers (forward-forward merge)
+
+⏱️ Time taken: Not Noted
+
+😅 Solved by Myself --> REf -->Merge two 2D arrays by summing values based on matching IDs. Both arrays are sorted by ID.
+
+🐞 Mistakes made:
+
+AT strt not taught about return way
+Not added k++
+misplaced j and i
+
+Time Complexity	O(n + m)
+Space Complexity	O(n + m)
+O(m + n) → Time grows linearly as m and n grow
+Runtime 0 ms
+Memory 42.4 MB
+
+🧪 Next goal: Practice similar problems (merge sorted arrays, interval merge, etc.)
+
+Sharing here to keep myself accountable and document the learning 💪
+#LeetCode #DSA #TwoPointers #Java #CodingJourney #LearningInPublic */
+
+### ✅ Java Code:
+
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int  i =0; 
+        int  j=0;
+        int  k=0;
+        int[] res = new int[nums1.length];
+
+        while(i < m && j<n){
+            if(nums1[i] == nums2[j])
+            {
+              res[k] = nums1[i];
+              i++;
+              k++;
+              res[k] = nums2[j];
+              j++;
+              k++;
+            }
+            else if(nums1[i] < nums2[j]){
+                res[k] = nums1[i];
+                i++;
+                k++;
+            }
+            else{
+               res[k] = nums2[j];
+                j++;  
+                k++;
+            }
+        }
+        while(i < m){
+            res[k] = nums1[i];
+            i++;
+            k++;
+        }
+         while(j < n){
+            res[k] = nums2[j];
+            j++;
+            k++;
+        }
+        for(int z =0;z<res.length;z++){
+            nums1[z] = res[z];
+        }
+    }
+}
