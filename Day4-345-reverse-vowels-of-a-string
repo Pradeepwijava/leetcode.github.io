@@ -1,0 +1,68 @@
+/*📚 Problem: 345. Reverse Vowels of a String
+
+  Link: https://leetcode.com/problems/reverse-vowels-of-a-string/description/
+
+🧠 Concept used: Two Pointers (Left and Right)
+Approach:
+I used the Two Pointers technique to reverse only the vowels in the input string.
+
+Steps:
+1. Convert the string to a character array for in-place modification.
+2. Create a Set containing all vowels (both lowercase and uppercase). (can use char array it optimizes time)
+3. Use two pointers: `left` from the start, `right` from the end.
+4. Move both pointers inward:
+   - If both characters are vowels, swap them.
+   - Else move the respective pointer if it's not pointing to a vowel.
+5. Convert the modified character array back to a string and return it.
+
+This is an efficient way to selectively reverse only specific characters in-place.
+
+⏱️ Time taken: Not noted
+
+😅 Solved fully by myself
+
+🐞 Mistakes made:
+    Not noted
+
+Time Complexity: O(n)  
+Space Complexity: O(1) (Set is constant space; no extra data structures used for the result)  
+Runtime: 5 ms  
+Memory: 44.62 MB
+
+🧪 Next goal: Try similar filtering logic on custom character types (like consonants, digits, etc.)
+
+Sharing here to keep myself accountable and document the learning 💪  
+#LeetCode #DSA #TwoPointers #Java #CodingJourney #LearningInPublic */
+
+### ✅ Java Code:
+
+class Solution {
+    public String reverseVowels(String s) {
+char[] ch = s.toCharArray(); // convert to mutable array
+    int left = 0, right = ch.length - 1;
+    Set<Character> vowels = new HashSet<>(
+    Arrays.asList('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U')
+);
+
+    while (left < right) {
+         boolean isLeftVowel = vowels.contains(ch[left]);
+         boolean isRightVowel = vowels.contains(ch[right]); // reduced 1ms 6 to 5 ms
+        if (isLeftVowel && isRightVowel) {
+            // Swap characters
+            char temp = ch[left];
+            ch[left] = ch[right];
+            ch[right] = temp;
+
+            // Move both pointers
+            left++;
+            right--;
+        } else if (!isLeftVowel) {
+            left++;
+        } else {
+            right--;
+        }
+    }
+
+    return new String(ch); // convert back to String
+    }
+}
