@@ -1,0 +1,61 @@
+/*📚 Problem: 2000. Reverse Prefix of Word
+
+    Link: https://leetcode.com/problems/reverse-prefix-of-word/description/
+
+🧠 Concept used: Two Pointers (Left and Right)
+Approach:
+I used the Two Pointers technique to reverse only the portion of the string up to the first occurrence of a given character `ch`.
+
+Steps:
+1. Convert the input string to a character array.
+2. Find the index of the first occurrence of the target character `ch`.
+3. If the character doesn't exist, return the original word.
+4. Use two pointers (`left` at 0, `right` at index of `ch`) to swap characters until they meet.
+5. Convert the character array back to a string and return.
+
+This is a clean use of Two Pointers to perform a **partial reversal** in-place.
+
+⏱️ Time taken: 15 min (includes edge case testing)
+
+😅 Solved fully by myself  
+
+🐞 Mistakes made:
+    Initially forgot to handle the case when `ch` is not found in the string.
+
+Time Complexity: O(n) — where n is the length of the string  
+Space Complexity: O(n) — due to string to char array conversion (cannot avoid this in Java)  
+Runtime: 0 ms  
+Memory:  42.2 MB 
+
+🧪 Next goal: Try partial reversal logic on numbers and linked lists.
+
+Sharing here to keep myself accountable and document the learning 💪  
+#LeetCode #DSA #TwoPointers #Java #CodingJourney #LearningInPublic */
+
+### ✅ Java Code:
+
+
+class Solution {
+    public String reversePrefix(String word, char ch) {
+        char[] s = word.toCharArray();
+         int index = word.indexOf(ch); // Step 1: Find first occurrence
+        
+        if (index == -1) {
+            return word; // Step 2: If not found, return original word
+        }
+        int left = 0;
+        int right = index;
+        while (left < right) {
+            char temp = s[left];
+            s[left] = s[right];
+            s[right] = temp;
+            left++;
+            right--;
+        }
+
+        // Step 4: Convert char array back to String
+        return new String(s);
+       
+    
+    }
+}
