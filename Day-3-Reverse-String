@@ -1,0 +1,51 @@
+/*📚 Problem: 344.reverse tring
+
+    Link :https://leetcode.com/problems/reverse-string/description/
+
+🧠 Concept used: Two Pointers (Left and Right)
+Approach:
+I used the Two Pointers technique where:
+One pointer starts from the left (0)
+Another from the right (s.length - 1)
+I swapped the characters at both ends and moved the pointers toward the center until they met.
+This avoids using extra space and makes the reversal efficient.
+
+⏱️ Time taken: Not noted
+
+😅 solved fully by myself 
+
+🐞 Mistakes made:
+     Incorrect placement of pointer increment
+
+Time Complexity: O(n/2) ≈ O(n)
+Space Complexity	O(1)
+Runtime 0 ms
+Memory 49.2 MB
+
+🧪 Next goal: Practice similar problems (merge sorted arrays, interval merge, etc.)
+
+Sharing here to keep myself accountable and document the learning 💪
+#LeetCode #DSA #TwoPointers #Java #CodingJourney #LearningInPublic */
+
+### ✅ Java Code:
+
+
+class Solution {
+    public void reverseString(char[] s) {
+     int right =s.length-1;
+     int m = (s.length-1)/2;
+     int left =0;
+     char temp =0;
+     for(int i =0;i<=m;i++){
+         temp = s[left];
+         s[left] =s[right];
+         s[right] = temp;
+         
+         left++;
+         right--;
+     }
+        
+       
+     
+    }
+}
