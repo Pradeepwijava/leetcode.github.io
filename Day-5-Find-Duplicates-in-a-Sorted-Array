@@ -1,0 +1,64 @@
+/*📚 Problem: Find Duplicates in a Sorted Array
+
+🔗 Custom Practice Problem
+
+🧠 Concept used: Simple Traversal with Count
+Approach:
+This approach is used to **find and print duplicate elements** in a sorted integer array without using any collection or additional data structures.
+
+Steps:
+1. Handle edge case: If the array has only one element, return early as no duplicates are possible.
+2. Initialize a count variable `c = 1`.
+3. Traverse the array from the second element:
+   - If the current element is same as the previous one, increment the count.
+   - If different:
+     - Check if the count is greater than 1 → if yes, print the previous element as duplicate.
+     - Reset the count to 1.
+4. At the end of the loop, handle the last element explicitly in case the array ends with a duplicate.
+
+✅ This method works **only for sorted arrays**, as duplicates are adjacent.
+
+⏱️ Time taken: Not noted
+
+😅 Solved mostly by myself
+
+🐞 Mistakes made:
+   - Initially missed handling the last duplicate (edge case at end of array)
+   - frgt to ad c=1;
+   - frgt to handle Handle edge case: If the array has only one element, return early as no duplicates are possible.
+
+Time Complexity: O(n)  
+Space Complexity: O(1)  
+Runtime: Very fast, no extra allocations  
+Memory: Constant
+
+🧪 Next goal: Extend this logic to work for **unsorted arrays** using `Set` or sort + scan.
+
+Learning to optimize using simple pointer logic helps build deeper intuition 💪  
+#DSA #Java #Array #Duplicates #NoCollection #SortedArray #LearningInPublic #CodingJourney */
+
+### ✅ Java Code:
+
+
+public class FindDuprev1 {
+    public static void main(String[] args) {
+        int c =1;
+
+        int [] arr = {0};
+        if (arr.length == 1) return;
+        for(int i =1;i<arr.length;i++){
+            if(arr[i] == arr[i-1]){
+                c++;
+            }
+            else{
+                if(c >1){
+                    System.out.println(arr[i-1]);
+                }
+                c=1;
+            }
+            if(i == arr.length-1  && c > 1){
+                System.out.println(arr[i]);
+            }
+        }
+    }
+}
