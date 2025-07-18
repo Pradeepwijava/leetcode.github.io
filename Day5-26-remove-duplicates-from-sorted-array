@@ -1,0 +1,56 @@
+/*📚 Problem: 26. Remove Duplicates from Sorted Array
+
+  Link: https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/
+
+🧠 Concept used: Two Pointers (Fast and Slow)
+Approach:
+I used the Two Pointers technique to remove duplicates **in-place** in a sorted array.
+
+Steps:
+1. Initialize pointer `k = 1` to track the position of the next unique element.
+2. Traverse the array from index 1:
+   - If the current element is not equal to the previous one,
+     - It's a new unique number → place it at index `k`, then increment `k`.
+3. After the loop, the first `k` elements of the array will be unique values in sorted order.
+4. Return `k` as the count of unique elements.
+
+This approach works well for sorted arrays, as all duplicates appear together.
+
+⏱️ Time taken:45 mins
+
+😅 Solved fully by myself
+
+🐞 Mistakes made:
+    retuened k+1
+
+Time Complexity: O(n)  
+Space Complexity: O(1) (in-place, no extra memory used)  
+Runtime: 0 ms  
+Memory: 45.1 MB
+
+🧪 Next goal: Try similar filtering logic on custom character types (like consonants, digits, etc.)
+
+Sharing here to keep myself accountable and document the learning 💪  
+#LeetCode #DSA #TwoPointers #Java #CodingJourney #LearningInPublic */
+
+### ✅ Java Code:
+
+class Solution {
+    public int removeDuplicates(int[] nums) {
+
+        int k = 1;
+        //int c =0;
+        for(int i =1;i<nums.length;i++){
+
+            if(nums[i] != nums[i-1]){
+               nums[k] = nums[i];
+               k++;
+
+            }
+ 
+        }
+        return k;
+
+        
+    }
+}
