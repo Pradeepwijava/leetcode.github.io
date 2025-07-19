@@ -1,0 +1,67 @@
+📚 922. Sort Array By Parity II  
+🔗 Link: https://leetcode.com/problems/sort-array-by-parity-ii/description/
+
+🧠 Concept Used: Two Pointers (Index Skipping Strategy)
+
+💡 Problem Statement:  
+Given an array `nums` of *even length*, where half the integers are **even** and half are **odd**,  
+rearrange it so that **even-indexed positions contain even numbers** and **odd-indexed positions contain odd numbers**.  
+Return any valid array that satisfies the condition.
+
+🔍 Approach (Two Pointer Skipping Style):
+- Use two pointers: 
+  - `even` → starts from index `0` and jumps by +2
+  - `odd` → starts from index `1` and jumps by +2
+- If `nums[even]` is already even, it’s in correct place → move `even` ahead.
+- If `nums[odd]` is already odd → move `odd` ahead.
+- If both are wrong → swap them!
+
+🎯 Logic:
+- Only swap when one even index has an odd number and one odd index has an even number.
+- This guarantees correctness because we know the array has **equal number of evens and odds**.
+
+😅 Solved by solution and chatgpt
+⏱️ Time taken: 35 mins  
+
+🐞 Mistakes made:
+   -frgt even ++ and odd++ in swap
+
+🧪 Next Goal:
+- Try variations: sort vowels/consonants at alternate positions
+- Explore DSA pattern "In-place Reordering with Conditions"
+
+📈 Time Complexity: O(n)  
+🗃️ Space Complexity: O(1) (in-place)  
+✅ Runtime: 3 ms  
+📦 Memory: 47.7 MB
+
+📌 #LeetCode #DSA #TwoPointers #Java #CodingJourney #LearningInPublic #ArrayReordering */
+
+// ✅ Java Code:
+
+
+
+class Solution {
+    public int[] sortArrayByParityII(int[] nums) {
+         int even = 0;
+    int odd = 1;
+
+    while (even < nums.length && odd < nums.length) {
+        if (nums[even] % 2 == 0) {
+            even += 2;
+        } else if (nums[odd] % 2 == 1) {
+            odd += 2;
+        } else {
+            // Swap
+            int temp = nums[even];
+            nums[even] = nums[odd];
+            nums[odd] = temp;
+            even += 2;
+            odd += 2;
+        }
+    }
+
+    return nums;
+        
+    }
+}
