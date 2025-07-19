@@ -1,0 +1,119 @@
+/*📚 Problem: 905. Sort Array by Parity  
+🔗 Link: https://leetcode.com/problems/sort-array-by-parity/
+
+🧠 Concept Used: Two Pointers (Partitioning style)
+
+💡 Problem Statement:  
+Given an array `nums`, move all even integers to the beginning of the array, followed by all the odd integers. Return any array that satisfies this property.  
+Do it in-place with O(1) extra space.
+🔍 Approach (with flags):
+
+I used a **Two Pointer** strategy (`left` and `right`), along with two boolean flags (`lb`, `rb`) to track whether:
+- `left` points to an odd number (`lb`)
+- `right` points to an even number (`rb`)
+
+🎯 Logic:
+- If `nums[left]` is odd and `nums[right]` is even, we **swap** them.
+- If not, we move the pointers inward depending on whether their values are already in the correct place.
+
+⏱️ Time taken:30 mins
+
+😅 Solved fully by myself
+
+🐞 Mistakes made:
+   - declared boolean outside loop
+   - entered right ++
+   - forgot return statement
+   - frgot semi colon
+Time Complexity: O(n)  
+Space Complexity: O(1) (in-place, no extra memory used)  
+Runtime: 1 ms  
+Memory: 45.2 MB
+
+🧪 Next goal: Try similar filtering logic on custom character types (like consonants, digits, etc.)
+
+Sharing here to keep myself accountable and document the learning 💪  
+#LeetCode #DSA #TwoPointers #Java #CodingJourney #LearningInPublic */
+
+// ✅ Java Code:
+
+
+class Solution {
+    public int[] sortArrayByParity(int[] nums) {
+//213456
+        int left = 0;
+      
+        int right = nums.length-1;
+        while(left < right){
+            boolean lb = false;
+            boolean rb = false;
+           if(nums[left] % 2 !=0){
+            lb = true;
+           }
+        
+           if(nums[right] % 2 ==0){
+              rb = true;
+           }
+
+           if(lb && rb){
+            int temp = nums[left];
+            nums[left] = nums[right];
+            nums[right] = temp;
+            left ++;
+            right --;
+           }else{
+               if(nums[left] % 2 ==0){
+                 left ++;
+                }
+                if(nums[right] % 2 !=0){
+                  right --;
+                }
+           }
+           
+        }
+        return nums;
+    }
+}
+
+
+//=======================================================================================================
+
+
+🔍 Clean Approach (0ms leetcode solution):  
+Used **two-pointer** strategy:
+1. `i` starts from beginning, `j` from end.
+2. Move `i` forward until it finds an odd.
+3. Move `j` backward until it finds an even.
+4. Swap them, repeat until `i >= j`.
+
+🚀 Steps:
+- Avoided extra flags by directly writing clean conditions.
+- Swaps only when necessary.
+
+✅ Benefits:
+- Efficient (O(n))
+- In-place (O(1) space)
+- Cleaner than the version with `if` flags and booleans.
+
+🧪 Code:
+
+//Good Approach
+
+public class Solution {
+    public int[] sortArrayByParity(int[] nums) {
+        int i = 0, j = nums.length - 1;
+        
+        while (i < j) {
+            while (i < j && nums[i] % 2 == 0)
+                i++;
+            while (i < j && nums[j] % 2 == 1)
+                j--;
+            
+            int temp = nums[i];
+            nums[i] = nums[j];
+            nums[j] = temp;
+        }
+        
+        return nums;
+    }
+}
