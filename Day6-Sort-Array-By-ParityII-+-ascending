@@ -1,0 +1,112 @@
+/*📚 Leetcode 922: Sort Array By Parity II + ascending
+
+
+🧠 Concept Used: Two Pointers + Sorting on Alternate Index
+💡 Problem Statement:
+Given an array nums of even length, where half of the elements are even and half are odd,
+rearrange it so that:
+
+Even-indexed positions contain even numbers
+
+Odd-indexed positions contain odd numbers
+
+Return any valid array that satisfies this condition.
+
+🔍 Approach:
+Step 1: Two Pointer Index Skipping (Core Reordering)
+Use two pointers:
+
+even → starts at index 0, moves by +2
+
+odd → starts at index 1, moves by +2
+
+Check:
+
+If nums[even] is already even → move even forward
+
+If nums[odd] is already odd → move odd forward
+
+If misplaced → swap the values at even and odd
+
+Step 2: Sort Even and Odd Indexed Subarrays Individually
+After placing even/odd values at correct indexes, sort:
+
+Even-indexed values among themselves
+
+Odd-indexed values among themselves
+
+Done using nested loops and a swap() utility method.
+🎯 Logic Summary:
+Place numbers correctly using two pointers (even & odd) skipping by +2.
+
+After reordering, sort the even-indexed and odd-indexed parts to improve structure.
+
+Swap is used only when necessary (for better performance and clarity).
+
+🐞 Mistakes Made During Solving:
+  - send wrong paramters for swap
+  - made mistake in temp logic
+
+Sorting logic at the end took a few tries to stabilize without index-out-of-bound errors.
+
+⏱️ Time Taken: Not Noted
+📈 Time Complexity:
+Step 1 (Reordering): O(n)
+
+Step 2 (Partial Sorting): O(n²) in worst case
+(Optimizations possible with better sorting technique like Collections.sort on filtered lists)
+
+🗃️ Space Complexity: O(1)
+(Everything done in-place)
+*/
+package leetcodeprac;
+
+import java.util.Arrays;
+
+public class SortByParityII {
+    public static void main(String[] args) {
+       int [] nums = {2,3,1,5,6,4,0,8,9,7};
+       int odd =1;
+       int even = 0;
+       int l = nums.length;
+       while(even < l && odd < l){
+           if(nums[even] % 2 ==0){
+               even +=2;
+           }
+           else if(nums[odd] % 2 ==1){
+               odd +=2;
+           }
+           else{
+               int temp = nums[even];
+               nums[even] = nums[odd];
+               nums[odd] = temp;
+               even +=2;
+               odd +=2;
+           }
+
+       }
+       for(int x =2;x<l;x++){
+           for(int y =0;y<l-x;y+=2){
+               if(nums[y] > nums[y+ 2] ){
+                   swap(nums[y],nums[y+ 2],nums);
+               }
+               int rY = y+1;
+               if(nums[rY] > nums[rY+ 2] ){
+                   System.out.println(rY +"======"+ (rY+2));
+                   swap(Y,(rY+2),nums);
+               }
+           }
+
+       }
+       
+
+    }
+    public static int [] swap (int a, int b,int [] arr ){
+
+        int temp = arr[a];
+        arr[a] = arr[b];
+        arr[b]=temp;
+        return arr;
+
+    }
+}
