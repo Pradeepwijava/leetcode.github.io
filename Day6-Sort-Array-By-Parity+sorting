@@ -1,0 +1,105 @@
+/*
+📚 Leetcode 905: Sort Array By Parity + sorting
+🔗 Problem Link
+
+🧠 Concept Used: Two Pointers (Opposite Ends) + Half Sorting
+💡 Problem Statement:
+Given an integer array nums, move all even integers to the front of the array followed by all the odd integers.
+Return any array that satisfies this condition.
+
+🔍 Approach:
+Step 1: Partition the array using Two Pointers (i and j)
+Initialize:
+
+i from start (0)
+
+j from end (n - 1)
+
+While i < j:
+
+If nums[i] is even, move i forward.
+
+If nums[j] is odd, move j backward.
+
+If both are wrongly placed (i.e., nums[i] is odd and nums[j] is even), swap them.
+
+Step 2: Sort Both Halves Individually
+After the partition:
+
+First half (index 0 to mid-1): Even numbers
+
+Second half (index mid to end): Odd numbers
+
+Apply a simple bubble sort on both halves for better order (optional based on use-case).
+
+🎯 Logic Summary:
+Use two pointers to push all even numbers to the left, odd numbers to the right.
+
+Then sort both halves for better readability (useful if output should be structured).
+
+🐞 Mistakes or Improvements:
+   - int nMid = midis not properly placed
+
+Sorting could be optimized by using Arrays.sort() on subarrays.
+
+⏱️ Time Taken: not noted
+📈 Time Complexity:
+Step 1 (Partition): O(n)
+
+Step 2 (Sorting Halves with Bubble Sort): O(n²) worst case
+⏩ Can be optimized using better sorting for each half
+
+🗃️ Space Complexity: O(1) (In-place)
+*/
+
+package leetcodeprac;
+
+import java.util.Arrays;
+
+public class SortByParity {
+    public static void main(String[] args) {
+        int [] nums = {2, 9, 1, 1, 8, 6, 0, 4, 3, 7};
+        int i = 0, j = nums.length - 1;
+        int z = nums.length;
+        while (i < j) {
+            while (i < j && nums[i] % 2 == 0)
+                i++;
+            while (i < j && nums[j] % 2 == 1)
+                j--;
+            System.out.println(i + "====="+ j);
+
+            int temp = nums[i];
+            nums[i] = nums[j];
+            nums[j] = temp;
+        }
+        int mid = z/2;
+
+        for(int l =1; l<mid;l++ ){
+            int nMid = mid;
+            for(int m =0;m< mid-l;m++ ){
+                if(m < mid){
+                   if(nums[m] > nums[m+1] ) {
+                       int temp = nums[m];
+                       nums[m] = nums[m+1];
+                       nums[m+1] = temp;
+                   }
+                }
+
+                if(nMid < z){
+                    if(nums[nMid] > nums[nMid+1] ) {
+                        int temp = nums[nMid];
+                        nums[nMid] = nums[nMid+1];
+                        nums[nMid+1] = temp;
+                    }
+                   nMid ++;
+
+                }
+
+            }
+
+        }
+
+        System.out.println(Arrays.toString(nums));
+    }
+
+}
