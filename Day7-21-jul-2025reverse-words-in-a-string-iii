@@ -1,0 +1,81 @@
+/* 📚 Leetcode 557: Reverse Words in a String III
+link: https://leetcode.com/problems/reverse-words-in-a-string-iii/description/
+🧠 Concept Used: String Splitting + Two-Pointer Reversal
+💡 Problem Statement:
+Given a string `s`, reverse the characters of each word individually while preserving whitespace and word order.
+
+Example:
+Input: s = "Let's take LeetCode contest"
+Output: "s'teL ekat edoCteeL tsetnoc"
+
+🔍 Approach:
+
+Step 1: Split the sentence into words:
+- Use `s.split(" ")` to break the input string into words.
+- Store each word in an array called `str`.
+
+Step 2: For each word, reverse it:
+- Convert the word to a character array.
+- Use two pointers (`left = 0`, `right = length - 1`) to reverse characters in-place.
+- Swap characters at `left` and `right` until the pointers meet.
+
+Step 3: Build the final result:
+- Use `StringBuilder` to append each reversed word.
+- Add a space `" "` after each word except the last one.
+
+🎯 Logic Summary:
+- Split input string into words using space.
+- Reverse each word individually using two-pointer method.
+- Join all reversed words back into a single string with spaces.
+
+🐞 Mistakes Made During Solving:
+Not noted
+
+⏱️ Time Taken: ~Not noted
+
+📈 Time Complexity: 5ms
+- O(n), where n is the total number of characters in the input string.
+- Each word is reversed in-place once.
+
+🗃️ Space Complexity:
+- O(n), due to storing words in an array and building a new output string.
+
+🧪 Example Dry Run:
+Input: `"hello world"`
+
+Split: ["hello", "world"]
+
+Reversals:
+- "hello" → "olleh"
+- "world" → "dlrow"
+
+Join result: `"olleh dlrow"`
+
+*/
+
+
+class Solution {
+    public String reverseWords(String s) {
+        String [] str = s.split(" ");
+        StringBuilder strB = new StringBuilder();
+        for(int i =0;i<str.length;i++){
+            String strI= str[i];
+            int right = strI.length()-1;
+            int left = 0;
+            char[] ch = strI.toCharArray();
+            while(left < right){
+            char temp = ch[left];
+            ch[left] = ch[right];
+            ch[right] =  temp;
+            left++;
+            right--;
+            }
+            String ss = new String(ch);
+            strB.append(ss);
+            if( i != str.length-1)
+               strB.append(" ");
+        }
+        return strB.toString();
+        
+    }
+}
