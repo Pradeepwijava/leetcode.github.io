@@ -1,0 +1,84 @@
+/* 📚 Leetcode 3: Longest Substring Without Repeating Characters
+link: https://leetcode.com/problems/longest-substring-without-repeating-characters/
+🧠 Concept Used: Sliding Window + HashSet
+💡 Problem Statement:
+Given a string s, find the length of the longest substring without repeating characters.
+
+Example:
+Input: s = "abcabcbb"
+Output: 3
+Explanation: The answer is "abc", with the length of 3.
+
+🔍 Approach:
+
+Step 1: Initialize pointers and storage:
+- Use two pointers: `left` and `right` to represent the current window.
+- Use a HashSet to store characters in the current window.
+
+Step 2: Expand the window using `right`:
+- For each character at position `right`, check if it exists in the HashSet.
+- If it doesn't, it's unique → add to set and update maxLength.
+- If it does exist (duplicate):
+   - Shrink the window by moving `left` forward
+   - Remove characters from set until the duplicate is removed.
+
+Step 3: Keep track of the maximum window size:
+
+You want to find the length of the longest substring that has no repeating characters.
+So: Every time you get a valid substring (no duplicates),
+You calculate its current value length string = right - left + 1(right moves and left also moves until dup soo we can find diff between them)
+And if this length is greater than the previous best (maxLength), you update it
+  maxLength = Math.max(maxLength, right - left + 1)
+
+🎯 Logic Summary:
+- The window contains only unique characters.
+- Expand with `right`, shrink with `left` when a duplicate is found.
+- Store the best (maximum) length found so far.
+
+🐞 Mistakes Made During Solving:
+- miised semicolon,frgt to initialize l, 
+- added i instead of right(variable mistake)
+
+⏱️ Time Taken: 1hr minutes (first try, including debugging)
+
+📈 Time Complexity:
+- O(n), where n = length of string.
+- Each character is visited at most twice (once by `right`, once by `left`).
+
+🗃️ Space Complexity:
+- O(k), where k is the size of the charset (e.g., 128 for ASCII).
+- In worst case, all characters are unique and stored in HashSet.
+
+🧪 Example Dry Run:
+Input: s = "pwwkew"
+- "pw" → unique
+- "pww" → duplicate → remove "p"
+- "ww" → duplicate → remove "w"
+- "wk" → valid
+- "wke" → valid → max = 3
+
+Result: 3
+
+*/
+
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+
+        int l = s.length();
+       int left =0;
+        int maxLength = 0;
+        Set<Character> seen = new HashSet();
+        for(int right=0; right<l; right++){
+           while(seen.contains(s.charAt(right))){ 
+             seen.remove(s.charAt(left));
+             left++;
+           }
+           seen.add(s.charAt(right));
+          maxLength =  Math.max(maxLength,right-left+1);
+
+        }
+    
+        return maxLength;
+        
+    }
+}
